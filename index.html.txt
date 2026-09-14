@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Coin Shawarma - Commandez vos Shawarmas</title>
+    <!-- Intégration des icônes FontAwesome -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        /* Variables de couleurs */
+        :root {
+            --primary: #FF6B00; /* Orange grillé appétissant */
+            --secondary: #FFB800; /* Jaune doré */
+            --dark: #1E1B18; /* Fond sombre moderne */
+            --light: #FAFAFA;
+            --gray: #666;
+        }
+
+        /* Styles Généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Barre de navigation */
+        header {
+            background-color: var(--dark);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links li a:hover {
+            color: var(--primary);
+        }
+
+        /* Section Accueil (Hero) */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
+                        url('https://unsplash.com') center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: var(--secondary);
+            font-weight: 300;
+        }
+
+        /* Bouton d'action principal */
+        .btn-call {
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 15px 35px;
+            font-size: 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .btn-call:hover {
+            transform: scale(1.05);
+            background-color: #e56000;
+        }
+
+        /* Section Menu */
+        .menu-section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #ddd;
+        }
+
+        .menu-info {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .menu-info h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .menu-info p {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        /* Pied de page (Footer) / Contacts */
+        footer {
+            background-color: var(--dark);
+            color: #fff;
+            padding: 40px 5% 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .footer-content h2 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .contact-detail {
+            font-size: 22px;
+            margin: 15px 0;
+            color: #fff;
+        }
+
+        .contact-detail a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Cache les liens sur mobile pour rester simple */
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            .btn-call {
+                font-size: 18px;
+                padding: 12px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barre de Navigation -->
+    <header>
+        <div class="navbar">
+            <div class="logo"><i class="fa-solid fa-fire"></i> <span>Le Coin Shawarma</span></div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#menu">Notre Menu</a></li>
+                <li><a href="#contact">Commander</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Section Accueil -->
+    <section id="accueil" class="hero">
+        <h1>Le Coin Shawarma</h1>
+        <p>Les meilleurs shawarmas chauds et savoureux de la ville !</p>
+        <!-- Le bouton appelle directement le numéro si le client est sur smartphone -->
+        <a href="tel:+237654869992" class="btn-call">
+            <i class="fa-solid fa-phone-volume"></i> Commander : 654 869 992
+        </a>
+    </section>
+
+    <!-- Section Menu Échantillon -->
+    <section id="menu" class="menu-section">
+        <h2 class="section-title">Nos Spécialités</h2>
+        <div class="menu-grid">
+            
+            <!-- Item 1 -->
+            <div class="menu-item">
+                <img src="https://unsplash.com" alt="Shawarma Poulet" class="menu-img">
+                <div class="menu-info">
+                    <h3>Shawarma Poulet</h3>
+                    <p>Émincé de poulet mariné, crème d'ail maison, frites fraîches et crudités croquantes.</p>
+                    <div class="price-row">
+                        <span class="price">Classique / Géant</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="menu-item">
+                <img src="https://unsplash.com" alt="Shawarma Viande" class="menu-img">
+                <div class="menu-info">
+                    <h3>Shawarma Viande de Bœuf</h3>
+                    <p>Viande de bœuf tendre grillée à la broche, sauce tahini, oignons au sumac et persil.</p>
+                    <div class="price-row">
+                        <span class="price">Classique / Géant</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="menu-item">
+                <img src="https://unsplash.com" alt="Shawarma Mixte" class="menu-img">
+                <div class="menu-info">
+                    <h3>Shawarma Mixte Spécial</h3>
+                    <p>Le duo parfait : viande de bœuf et poulet réunis avec un supplément fromage fondu.</p>
+                    <div class="price-row">
+                        <span class="price">Spécialité</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Pied de page & Contact -->
+    <footer id="contact">
+        <div class="footer-content">
+            <h2>Une faim de loup ?</h2>
+            <p>Commandez dès maintenant et venez récupérer votre shawarma chaud ou faites-vous livrer !</p>
+            <div class="contact-detail">
+                <i class="fa-solid fa-phone" style="color: var(--primary);"></i> 
+                Appelez le : <a href="tel:+237654869992">654 869 992</a>
+            </div>
